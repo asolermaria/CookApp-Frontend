@@ -3,9 +3,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Recipes from "./pages/Recipes";
 import RecipeDetail from "./pages/RecipeDetail";
-import MyRecipes from "./pages/MyRecipes";
+import FavouriteRecipes from "./pages/FavouriteRecipes";
+import UserDashboard from "./pages/UserDashboard";
+import CreateRecipe from "./pages/CreateRecipe"
+import EditRecipe from "./pages/EditRecipe"
 
 function App() {
   return (
@@ -16,10 +18,13 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        <Route path="/recipes" element={<Recipes />} />
         <Route path="/recipes/:id" element={<RecipeDetail />} />
 
-        <Route path="/my-recipes" element={<MyRecipes />} />
+        <Route path="/favourite-recipes" element={<FavouriteRecipes />} />
+
+        <Route path="/user-dashboard" element={<UserDashboard />} />
+        <Route path="/create-recipe" element={<CreateRecipe />} />
+        <Route path="/edit-recipe" element={<EditRecipe />} />
       </Routes>
     </BrowserRouter>
   );

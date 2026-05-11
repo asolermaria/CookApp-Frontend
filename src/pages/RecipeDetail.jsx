@@ -1,5 +1,12 @@
+import { Link } from "react-router-dom";
+
 const RecipeDetail = () => {
-  return <h1>RecipeDetail</h1>;
+  return (
+    <div className="recipe-detail-page">
+      <h1>RecipeDetail</h1>
+      <Link to="/">Home</Link>
+    </div>
+  );
 };
 
 export default RecipeDetail;
