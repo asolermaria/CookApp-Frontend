@@ -4,7 +4,7 @@ const FavouriteRecipes = () => {
   return (
     <div className="favourites-page">
       <h1>FavouriteRecipes</h1>
-      <Link to="/">Home</Link>
+      <Link to="/home">Home</Link>
     </div>
   );
 };

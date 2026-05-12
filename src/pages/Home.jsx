@@ -7,10 +7,24 @@ import RecipeFilters from "../components/RecipeFilters";
 import RecipeList from "../components/RecipeList";
 
 const Home = () => {
+  const [user, setUser] = useState(null);
   const [recipes, setRecipes] = useState([]);
   const [title, setTitle] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getLoggedUser = async () => {
+      try {
+        const response = await api.get("/auth/active-user");
+        setUser(response.data.user);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getLoggedUser();
+  }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -44,10 +58,10 @@ const Home = () => {
       <div className="recipes-container">
         <h1>CookApp</h1>
 
-        <span>¡Bienvenid@, !</span>
+        <span>¡Bienvenid@, {user?.name}!</span>
 
         <nav className="home-nav">
-          <Link to="/">Ver mi perfil</Link>
+          <Link to="/user-dashboard">Ver mi perfil</Link>
           <Link to="/favourite-recipes">Ver mis recetas favoritas</Link>
         </nav>
 

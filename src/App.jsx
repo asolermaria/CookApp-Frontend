@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -13,7 +13,8 @@ function App() {
   return (
     <BrowserRouter> {/* Controla las URLs del navegador sin recargar la página */}
       <Routes> {/* Agrupa las rutas */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/home" element={<Home />} />
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

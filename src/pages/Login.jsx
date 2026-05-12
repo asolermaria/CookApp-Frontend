@@ -28,7 +28,7 @@ const Login = () => {
     try {
       const response = await api.post("/auth/login", formData);
 
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       setError(error.response?.data?.message || "Error al iniciar sesión");
     }
