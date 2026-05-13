@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import api from "../api/axios";
 
@@ -30,8 +30,8 @@ const CreateRecipe = () => {
 
         // Convertimos ingredientes de String a Array
         ingredients: formData.ingredients
-          .split(",")
-          .map((ingredient) => ingredient.trim()),
+          .split(",") // Separa elementos del array por comas
+          .map((ingredient) => ingredient.trim()), // Limpia espacios al principio y al final de cada ingrediente
       });
 
       alert("Receta creada")
@@ -45,6 +45,8 @@ const CreateRecipe = () => {
     <div className="create-recipe-page">
       <div className="create-recipe-container">
         <h1>Crear receta</h1>
+
+        <Link to="/user-dashboard">Volver a mi perfil</Link>
 
         <form onSubmit={handleSubmit}>
           <input

@@ -25,7 +25,7 @@ function App() {
 
         <Route path="/user-dashboard" element={<UserDashboard />} />
         <Route path="/create-recipe" element={<CreateRecipe />} />
-        <Route path="/edit-recipe" element={<EditRecipe />} />
+        <Route path="/edit-recipe/:id" element={<EditRecipe />} />
       </Routes>
     </BrowserRouter>
   );
