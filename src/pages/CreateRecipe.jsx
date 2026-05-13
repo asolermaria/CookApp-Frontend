@@ -4,7 +4,7 @@ const CreateRecipe = () => {
   return (
     <div className="create-recipe-page">
       <h1>CreateRecipe</h1>
-      <Link to="/home">Home</Link>
+      <Link to="/user-dashboard">Volver a mi perfil</Link>
     </div>
   );
 };

@@ -4,7 +4,7 @@ const EditRecipe = () => {
   return (
     <div className="edit-recipe-page">
       <h1>EditRecipe</h1>
-      <Link to="/home">Cancelar edición</Link>
+      <Link to="/user-dashboard">Cancelar edición</Link>
     </div>
   );
 };

@@ -38,6 +38,7 @@ const RecipeDetail = () => {
   return (
     <div className="recipe-detail-page">
       <Link to="/home">Ver todas las recetas</Link>
+      <Link to="/user-dashboard">Ir a mi perfil</Link>
 
       {loading && <p>Cargando receta...</p>}
 
