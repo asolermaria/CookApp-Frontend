@@ -35,9 +35,6 @@ const UserDashboard = () => {
     getMyRecipes();
   }, []);
 
-  console.log(myRecipes);
-  
-
   const handleLogout = async () => {
     try {
       await api.post("/auth/logout");
@@ -49,7 +46,9 @@ const UserDashboard = () => {
 
   const handleDelete = async (recipeId) => {
     try {
-      confirm("¿Estás segur@ que quieres borrar esta receta?")
+      const isConfirmed = confirm("¿Estás segur@ que quieres borrar esta receta?");
+      if (!isConfirmed) return;
+
       await api.delete(`/recipes/${recipeId}`);
       setMyRecipes((prev) => prev.filter((recipe) => recipe._id !== recipeId));
     } catch (error) {
@@ -80,7 +79,7 @@ const UserDashboard = () => {
           <p>Todavía no has creado recetas.</p>
         )}
 
-        {myRecipes.map((recipe) => (
+        {!loading && myRecipes.map((recipe) => (
           <div className="recipe-card" key={recipe._id}>
 
             <img src={recipe.image} alt={recipe.title} />

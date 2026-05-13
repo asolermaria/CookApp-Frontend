@@ -34,7 +34,7 @@ const CreateRecipe = () => {
           .map((ingredient) => ingredient.trim()), // Limpia espacios al principio y al final de cada ingrediente
       });
 
-      alert("Receta creada")
+      alert("Receta creada");
       navigate("/user-dashboard");
     } catch (error) {
       console.log(error);

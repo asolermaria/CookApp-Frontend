@@ -61,7 +61,7 @@ const EditRecipe = () => {
           .map((ingredient) => ingredient.trim()), // Limpia espacios al principio y al final de cada ingrediente
       });
 
-      alert("Receta modificada")
+      alert("Receta modificada");
       navigate("/user-dashboard");
     } catch (error) {
       console.log(error);

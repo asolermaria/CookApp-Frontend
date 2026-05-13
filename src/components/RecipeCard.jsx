@@ -15,7 +15,7 @@ const RecipeCard = ({ recipe }) => {
         await api.post(`/favorites/${recipe._id}`);
       }
 
-      setIsFavourite(!isFavourite);
+      setIsFavourite((prev) => !prev);
     } catch (error) {
       console.log(error);
     }
@@ -23,7 +23,7 @@ const RecipeCard = ({ recipe }) => {
 
   return (
     <div className="recipe-card">
-      <button onClick={handleFavourite}>
+      <button type="button" onClick={handleFavourite}>
         <FaHeart color={isFavourite ? "red" : "white"} />
       </button>
 

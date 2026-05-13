@@ -56,7 +56,7 @@ const FavouriteRecipes = () => {
         .filter((favorite) => favorite.recipe_id) // Filtramos solo por los favoritos que tengan recipe_id, así evitamos recetas borradas
         .map((favorite) => (
           <div className="recipe-card" key={favorite._id}>
-            <button
+            <button type="button"
               onClick={() => handleRemoveFavorite(favorite.recipe_id._id)}
             >
               <FaHeart color="red" />
