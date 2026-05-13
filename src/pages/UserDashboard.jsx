@@ -49,6 +49,7 @@ const UserDashboard = () => {
 
   const handleDelete = async (recipeId) => {
     try {
+      confirm("¿Estás segur@ que quieres borrar esta receta?")
       await api.delete(`/recipes/${recipeId}`);
       setMyRecipes((prev) => prev.filter((recipe) => recipe._id !== recipeId));
     } catch (error) {
@@ -81,7 +82,7 @@ const UserDashboard = () => {
 
         {myRecipes.map((recipe) => (
           <div className="recipe-card" key={recipe._id}>
-            
+
             <img src={recipe.image} alt={recipe.title} />
             <h2>{recipe.title}</h2>
 
