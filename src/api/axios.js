@@ -5,13 +5,17 @@ const api = axios.create({
   withCredentials: true, // Envío de cookies al backend
 });
 
-// Cada vez que se hace una petición, axios revisa la respuesta
-// Si es 401 (Unauthorized), redirige el usuario a login
+// Axios revisa cada respuesta del backend
+// Si la respuesta es 401 y el usuario no está en /login o /register, redirige el usuario a login
 api.interceptors.response.use(
   (response) => response,
 
   (error) => {
-    if (error.response?.status === 401) {
+    const isUnauthorized = error.response?.status === 401;
+    const isLoginPage = window.location.pathname === "/login";
+    const isRegisterPage = window.location.pathname === "/register";
+
+    if (isUnauthorized && !isLoginPage && !isRegisterPage) {
       window.location.href = "/login";
     }
 
