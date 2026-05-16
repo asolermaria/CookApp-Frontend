@@ -37,17 +37,31 @@ const RecipeDetail = () => {
 
   return (
     <div className="recipe-detail-page">
-      <Link to="/home">Ver todas las recetas</Link>
-      <Link to="/user-dashboard">Ir a mi perfil</Link>
+      <div className="recipe-detail-container">
+        <nav className="recipe-detail-nav">
+          <Link to="/home">Ver todas las recetas</Link>
+          <Link to="/user-dashboard">Ir a mi perfil</Link>
+        </nav>
 
-      {loading && <p>Cargando receta...</p>}
-
-      <img src={recipe.image} alt={recipe.title} />
-      <h1>{recipe.title}</h1>
-      <p>Ingredientes: {recipe.ingredients?.join(", ")}</p>
-      <p>Pasos: {recipe.steps}</p>
-      <p>Dificultad: {recipe.difficulty}</p>
-      <p>Creador: {recipe.user_id?.name}</p>
+        <img src={recipe.image} alt={recipe.title} />
+        <h1>{recipe.title}</h1>
+        <p>
+          <b>Ingredientes: </b>
+          {recipe.ingredients?.join(", ")}
+        </p>
+        <p>
+          <b>Pasos: </b>
+          {recipe.steps}
+        </p>
+        <p>
+          <b>Dificultad: </b>
+          {recipe.difficulty}
+        </p>
+        <p>
+          <b>Creador: </b>
+          <b>{recipe.user_id?.name}</b>
+        </p>
+      </div>
     </div>
   );
 };

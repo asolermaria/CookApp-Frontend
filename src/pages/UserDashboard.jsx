@@ -39,7 +39,9 @@ const UserDashboard = () => {
 
   const handleDelete = async (recipeId) => {
     try {
-      const isConfirmed = confirm("¿Estás segur@ que quieres eliminar esta receta?");
+      const isConfirmed = confirm(
+        "¿Estás segur@ que quieres eliminar esta receta?",
+      );
       if (!isConfirmed) return;
 
       await api.delete(`/recipes/${recipeId}`);
@@ -56,13 +58,19 @@ const UserDashboard = () => {
 
         <Link to="/home">Ver todas las recetas</Link>
 
-        <span>¡Bienvenid@, {user?.name}!</span>
-        <span>¿Qué quieres hacer hoy?</span>
+        <div className="user-dashboard-msg-bienvenida">
+          <span>
+            ¡Bienvenid@, <b>{user?.name}</b>!
+          </span>
+          <span>¿Qué quieres hacer hoy?</span>
+        </div>
 
-        <Link to="/create-recipe">Crear una nueva receta</Link>
-        <button type="button" onClick={handleLogout}>
-          Cerrar sesión
-        </button>
+        <div className="user-dashboard-options">
+          <Link to="/create-recipe">Crear una nueva receta</Link>
+          <button type="button" onClick={handleLogout}>
+            Cerrar sesión
+          </button>
+        </div>
 
         <span>Recetas creadas por mi</span>
 
@@ -72,19 +80,21 @@ const UserDashboard = () => {
           <p>Todavía no has creado recetas.</p>
         )}
 
-        {!loading && myRecipes.map((recipe) => (
-          <div className="recipe-card" key={recipe._id}>
+        <div className="recipes-container">
+          {!loading &&
+            myRecipes.map((recipe) => (
+              <div className="recipe-card" key={recipe._id}>
+                <img src={recipe.image} alt={recipe.title} />
+                <h2>{recipe.title}</h2>
 
-            <img src={recipe.image} alt={recipe.title} />
-            <h2>{recipe.title}</h2>
-
-            <Link to={`/recipes/${recipe._id}`}>Ver detalle</Link>
-            <Link to={`/edit-recipe/${recipe._id}`}>Editar receta</Link>
-            <button type="button" onClick={() => handleDelete(recipe._id)}>
-              Eliminar receta
-            </button>
-          </div>
-        ))}
+                <Link to={`/recipes/${recipe._id}`}>Ver detalle</Link>
+                <Link to={`/edit-recipe/${recipe._id}`}>Editar receta</Link>
+                <button className="delete-button" type="button" onClick={() => handleDelete(recipe._id)}>
+                  Eliminar receta
+                </button>
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );

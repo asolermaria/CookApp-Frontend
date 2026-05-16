@@ -31,7 +31,8 @@ const CreateRecipe = () => {
         // Convertimos ingredientes de String a Array
         ingredients: formData.ingredients
           .split(",") // Separa elementos del array por comas
-          .map((ingredient) => ingredient.trim()), // Limpia espacios al principio y al final de cada ingrediente
+          .map((ingredient) => ingredient.trim()) // Limpia espacios al principio y al final de cada ingrediente
+          .filter((ingredient) => ingredient !== ""), // Evita guardar ingredientes vacíos si el usuario añade comas extra
       });
 
       alert("Receta creada");

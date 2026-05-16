@@ -6,8 +6,8 @@ import Register from "./pages/Register";
 import RecipeDetail from "./pages/RecipeDetail";
 import FavouriteRecipes from "./pages/FavouriteRecipes";
 import UserDashboard from "./pages/UserDashboard";
-import CreateRecipe from "./pages/CreateRecipe"
-import EditRecipe from "./pages/EditRecipe"
+import CreateRecipe from "./pages/CreateRecipe";
+import EditRecipe from "./pages/EditRecipe";
 
 function App() {
   return (

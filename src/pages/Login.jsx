@@ -62,7 +62,7 @@ const Login = () => {
           <button type="submit">Entrar</button>
         </form>
 
-        {error && <p>{error}</p>}
+        {error && <p className="mensaje-error">{error}</p>}
 
         <div className="login-footer">
           <p>¿Aún no tienes cuenta con nosotros?</p>

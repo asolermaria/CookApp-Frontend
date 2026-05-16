@@ -48,32 +48,41 @@ const FavouriteRecipes = () => {
 
   return (
     <div className="favorites-page">
-      <Link to="/home">Volver al inicio</Link>
+      <div className="favorites-container">
+        <Link to="/home">Ver todas las recetas</Link>
 
-      <h1>Mis recetas favoritas</h1>
+        <h1>Mis recetas favoritas</h1>
 
-      {favorites
-        .filter((favorite) => favorite.recipe_id) // Filtramos solo por los favoritos que tengan recipe_id, así evitamos recetas borradas
-        .map((favorite) => (
-          <div className="recipe-card" key={favorite._id}>
-            <button type="button"
-              onClick={() => handleRemoveFavorite(favorite.recipe_id._id)}
-            >
-              <FaHeart color="red" />
-            </button>
+        <div className="recipes-container">
+          {favorites
+            .filter((favorite) => favorite.recipe_id) // Filtramos solo por los favoritos que tengan recipe_id, así evitamos recetas borradas
+            .map((favorite) => (
+              <div className="recipe-card" key={favorite._id}>
+                <button
+                  type="button"
+                  onClick={() => handleRemoveFavorite(favorite.recipe_id._id)}
+                >
+                  <FaHeart color="red" />
+                </button>
 
-            <img
-              src={favorite.recipe_id.image}
-              alt={favorite.recipe_id.title}
-            />
+                <img
+                  src={favorite.recipe_id.image}
+                  alt={favorite.recipe_id.title}
+                />
 
-            <h2>{favorite.recipe_id.title}</h2>
+                <h2>{favorite.recipe_id.title}</h2>
 
-            <p>Creador: {favorite.recipe_id.user_id?.name}</p>
+                <p>
+                  Creador: <b>{favorite.recipe_id.user_id?.name}</b>
+                </p>
 
-            <Link to={`/recipes/${favorite.recipe_id._id}`}>Ver detalle</Link>
-          </div>
-        ))}
+                <Link to={`/recipes/${favorite.recipe_id._id}`}>
+                  Ver detalle
+                </Link>
+              </div>
+            ))}
+        </div>
+      </div>
     </div>
   );
 };

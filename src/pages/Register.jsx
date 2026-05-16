@@ -70,7 +70,7 @@ const Register = () => {
           <button type="submit">Registrarse</button>
         </form>
 
-        {error && <p>{error}</p>}
+        {error && <p className="mensaje-error">{error}</p>}
         {error === "Email ya registrado" && (
           <Link to="/login">¿Quieres iniciar sesión?</Link>
         )}

@@ -43,11 +43,11 @@ const Home = () => {
   }, [title, difficulty]);
 
   return (
-    <div className="recipes-page">
-      <div className="recipes-container">
+    <div className="home-page">
+      <div className="home-container">
         <h1>CookApp</h1>
 
-        <span>¡Bienvenid@, {user?.name}!</span>
+        <span>¡Bienvenid@, <b>{user?.name}</b>!</span>
 
         <nav className="home-nav">
           <Link to="/user-dashboard">Ver mi perfil</Link>
@@ -60,8 +60,9 @@ const Home = () => {
           difficulty={difficulty}
           setDifficulty={setDifficulty}
         />
-
-        <RecipeList recipes={recipes} loading={loading} />
+        <div className="recipes-container">
+          <RecipeList recipes={recipes} loading={loading} />
+        </div>
       </div>
     </div>
   );
