@@ -1,24 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import api from "../api/axios";
+import { AuthContext } from "../context/AuthContext";
 
 const UserDashboard = () => {
-  const [user, setUser] = useState(null);
   const [myRecipes, setMyRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const getLoggedUser = async () => {
-      try {
-        const response = await api.get("/auth/active-user");
-        setUser(response.data.user);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const { user, setUser } = useContext(AuthContext);
 
+  useEffect(() => {
     const getMyRecipes = async () => {
       try {
         setLoading(true);
@@ -31,13 +24,13 @@ const UserDashboard = () => {
       }
     };
 
-    getLoggedUser();
     getMyRecipes();
   }, []);
 
   const handleLogout = async () => {
     try {
       await api.post("/auth/logout");
+      setUser(null); // Limpiamos el contexto al cerrar sesión
       navigate("/login");
     } catch (error) {
       console.log(error);
@@ -46,7 +39,7 @@ const UserDashboard = () => {
 
   const handleDelete = async (recipeId) => {
     try {
-      const isConfirmed = confirm("¿Estás segur@ que quieres borrar esta receta?");
+      const isConfirmed = confirm("¿Estás segur@ que quieres eliminar esta receta?");
       if (!isConfirmed) return;
 
       await api.delete(`/recipes/${recipeId}`);

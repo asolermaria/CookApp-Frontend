@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import api from "../api/axios";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { setUser } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -22,12 +24,11 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setError("");
 
     try {
       const response = await api.post("/auth/login", formData);
-
+      setUser(response.data.user);
       navigate("/home");
     } catch (error) {
       setError(error.response?.data?.message || "Error al iniciar sesión");

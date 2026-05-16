@@ -1,30 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import api from "../api/axios";
+import { AuthContext } from "../context/AuthContext";
 
 import RecipeFilters from "../components/RecipeFilters";
 import RecipeList from "../components/RecipeList";
 
 const Home = () => {
-  const [user, setUser] = useState(null);
   const [recipes, setRecipes] = useState([]);
   const [title, setTitle] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const getLoggedUser = async () => {
-      try {
-        const response = await api.get("/auth/active-user");
-        setUser(response.data.user);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getLoggedUser();
-  }, []);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
