@@ -31,7 +31,7 @@ const RecipeCard = ({ recipe }) => {
 
       <h2>{recipe.title}</h2>
 
-      <span>Creador: <b>{recipe.user_id?.name}</b></span>
+      <p>Creador: <b>{recipe.user_id?.name}</b></p>
 
       <Link to={`/recipes/${recipe._id}`}>Ver detalle</Link>
     </div>

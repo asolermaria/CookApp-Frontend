@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { FaHeart } from "react-icons/fa";
 
 import api from "../api/axios";
 
@@ -7,6 +8,7 @@ const RecipeDetail = () => {
   const { id } = useParams();
 
   const [recipe, setRecipe] = useState(null);
+  const [isFavourite, setIsFavourite] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -17,6 +19,7 @@ const RecipeDetail = () => {
         const response = await api.get(`/recipes/${id}`);
 
         setRecipe(response.data);
+        setIsFavourite(response.data.isFavourite || false);
       } catch (error) {
         console.log(error);
       } finally {
@@ -35,6 +38,20 @@ const RecipeDetail = () => {
     return <p>Receta no encontrada.</p>;
   }
 
+  const handleFavourite = async () => {
+    try {
+      if (isFavourite) {
+        await api.delete(`/favorites/${recipe._id}`);
+      } else {
+        await api.post(`/favorites/${recipe._id}`);
+      }
+
+      setIsFavourite((prev) => !prev);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="recipe-detail-page">
       <div className="recipe-detail-container">
@@ -43,6 +60,9 @@ const RecipeDetail = () => {
           <Link to="/user-dashboard">Ir a mi perfil</Link>
         </nav>
 
+        <button type="button" onClick={handleFavourite}>
+          <FaHeart color={isFavourite ? "red" : "white"} />
+        </button>
         <img src={recipe.image} alt={recipe.title} />
         <h1>{recipe.title}</h1>
         <p>

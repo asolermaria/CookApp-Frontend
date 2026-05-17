@@ -7,7 +7,7 @@
 }
 
 * {
-  box-sizing: border-box;
+  box-sizing: border-box; /* las medidas se calculan desde el borde del elemento */
   margin: 0;
   padding: 0;
 }
@@ -15,7 +15,7 @@
 /* LAYOUT GENERAL */
 .login-page,
 .register-page,
-.recipes-page,
+.home-page,
 .recipe-detail-page,
 .favorites-page,
 .user-dashboard-page,
@@ -24,7 +24,7 @@
   padding: 20px;
 }
 
-/* CONTAINERS */
+/* CONTENIDO DE LAS PÁGINAS */
 .login-container,
 .register-container,
 .home-container,
@@ -34,15 +34,24 @@
 .create-recipe-container,
 .edit-recipe-container {
   width: 80%;
-  margin: auto;
+  max-width: 1200px;
+  margin: auto; /* reparte automáticamente el margen sobrante (centra contenido) */
 }
 
 /* ESTILOS GLOBALES */
 body {
-    margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* viewport height: 100% de la pantalla visible */
   background: var(--background-color);
   font-family: Arial, sans-serif;
   color: black;
+}
+
+#root { /* contenedor donde React renderiza toda la aplicación */
+  flex: 1; /* ocupa todo el espacio disponible */
+  display: flex;
+  flex-direction: column;
 }
 
 form {
@@ -66,7 +75,7 @@ select {
 input:focus,
 textarea:focus,
 select:focus {
-  outline: none;
+  outline: none; /* quitamos outline (borde) por defecto del navegador */
   border: 1px solid var(--secondary-color);
 }
 
@@ -99,16 +108,12 @@ h2 {
 
 span,
 p {
-  display: block;
+  display: block; /* ocupa toda la linea (span por defecto no lo hace, es inline) */
   margin: 10px 0;
 }
 
-/* span {
-  font-weight: bold;
-} */
-
 a {
-  text-decoration: none;
+  text-decoration: none; /* quita el subrayado por defecto */
   color: #2f80c0;
   font-weight: bold;
 }
@@ -117,7 +122,29 @@ a:hover {
   color: var(--secondary-color);
 }
 
+footer {
+  margin-top: auto; /* usa todo el espacio libre arriba, como #root ocupa todo el espacio, se fija abajo */
+  padding: 10px;
+  background: white;
+  text-align: center;
+  border-top: 2px solid var(--primary-color);
+}
+
+footer p {
+  margin: 0;
+  font-weight: bold;
+  color: var(--secondary-color);
+}
+
 /* CLASES */
+
+/* Register y Login */
+.register-footer,
+.login-footer {
+  margin-top: 25px;
+}
+
+/* Recipe Card */
 .recipe-card {
   background: white;
   padding: 15px;
@@ -132,7 +159,7 @@ a:hover {
 .recipe-card img {
   width: 100%;
   height: 200px;
-  object-fit: cover;
+  object-fit: cover; /* la imagen rellena el espacio sin deformarse (mantiene su proporción, se recorta si es necesario y cubre todo el espacio) */
   border-radius: 12px;
 }
 
@@ -144,77 +171,109 @@ a:hover {
   margin-top: 10px;
 }
 
-.recipe-detail-page img {
+/* Recipe Detail */
+.recipe-detail-container img {
   width: 100%;
   max-height: 400px;
-  object-fit: cover;
+  object-fit: cover; /* la imagen rellena el espacio sin deformarse (mantiene su proporción, se recorta si es necesario y cubre todo el espacio) */
   border-radius: 12px;
 }
 
+.recipe-detail-container button {
+  width: 100%;
+  margin: 10px 0;
+}
+
+/* Nav */
 .home-nav,
-.recipe-detail-nav {
+.recipe-detail-nav,
+.favourites-nav {
   display: flex;
   gap: 20px;
   margin: 20px 0;
 }
 
-.recipes-filters {
+/* Home */
+.home-filters {
   display: flex;
   gap: 10px;
   margin: 20px 0;
 }
 
 .recipes-container {
-  display: grid;
+  display: grid; /* Permite crear filas, columnas y organizar sus hijos */
   gap: 20px;
 }
 
+/* User Dashboard */
 .delete-button {
   background-color: red;
-}
-
-.register-footer,
-.login-footer {
-  margin-top: 25px;
 }
 
 .mensaje-error {
   color: red;
   font-weight: bold;
+  font-size: 14px;
 }
 
-.user-dashboard-msg-bienvenida{
-    margin-top: 40px;
-    margin-bottom: 25px;
+.user-dashboard-msg-bienvenida {
+  font-size: 18px;
+  margin-top: 40px;
+  margin-bottom: 25px;
 }
 
-.user-dashboard-options{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 40px;
+.user-dashboard-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 40px;
 }
 
-.user-dashboard-options button{
-    color: white;
-    background-color: red;
-    width: fit-content;
+.user-dashboard-options button {
+  color: white;
+  background-color: red;
+  width: fit-content; /* El tamaño del botón se ajusta a su contenido */
+}
+
+.user-dashboard-msg-bienvenida,
+.user-dashboard-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Span */
+.login-container span,
+.register-container span,
+.home-container span {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 /* MEDIA QUERIES */
 @media (min-width: 768px) {
   .recipes-container {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* Crea 2 columnas iguales */
   }
 }
 
 @media (max-width: 600px) {
-  .recipes-filters {
+  .home-filters {
     flex-direction: column;
   }
 
   .home-nav,
   .recipe-detail-nav {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 450px) {
+  h1 {
+    font-size: 25px;
+  }
+  h2 {
+    font-size: 18px;
   }
 }

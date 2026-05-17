@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -9,25 +9,30 @@ import UserDashboard from "./pages/UserDashboard";
 import CreateRecipe from "./pages/CreateRecipe";
 import EditRecipe from "./pages/EditRecipe";
 
+import Footer from "./components/Footer";
+
 function App() {
+  const location = useLocation();
+
+  const hideFooter =
+    location.pathname === "/login" || location.pathname === "/register";
+
   return (
-    <BrowserRouter> {/* Controla las URLs del navegador sin recargar la página */}
-      <Routes> {/* Agrupa las rutas */}
+    <>
+      <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/home" element={<Home />} />
-
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
         <Route path="/recipes/:id" element={<RecipeDetail />} />
-
         <Route path="/favourite-recipes" element={<FavouriteRecipes />} />
-
         <Route path="/user-dashboard" element={<UserDashboard />} />
         <Route path="/create-recipe" element={<CreateRecipe />} />
         <Route path="/edit-recipe/:id" element={<EditRecipe />} />
       </Routes>
-    </BrowserRouter>
+
+      {!hideFooter && <Footer />}
+    </>
   );
 }
 

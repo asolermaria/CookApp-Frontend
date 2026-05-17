@@ -60,7 +60,7 @@ const UserDashboard = () => {
 
         <div className="user-dashboard-msg-bienvenida">
           <span>
-            ¡Bienvenid@, <b>{user?.name}</b>!
+            ¡Hola, <b>{user?.name}</b>!
           </span>
           <span>¿Qué quieres hacer hoy?</span>
         </div>
@@ -72,7 +72,9 @@ const UserDashboard = () => {
           </button>
         </div>
 
-        <span>Recetas creadas por mi</span>
+        <span>
+          <b>Recetas creadas por mi:</b>
+        </span>
 
         {loading && <p>Cargando tus recetas...</p>}
 
@@ -82,18 +84,24 @@ const UserDashboard = () => {
 
         <div className="recipes-container">
           {!loading &&
-            myRecipes.map((recipe) => (
-              <div className="recipe-card" key={recipe._id}>
-                <img src={recipe.image} alt={recipe.title} />
-                <h2>{recipe.title}</h2>
+            myRecipes
+              .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+              .map((recipe) => (
+                <div className="recipe-card" key={recipe._id}>
+                  <img src={recipe.image} alt={recipe.title} />
+                  <h2>{recipe.title}</h2>
 
-                <Link to={`/recipes/${recipe._id}`}>Ver detalle</Link>
-                <Link to={`/edit-recipe/${recipe._id}`}>Editar receta</Link>
-                <button className="delete-button" type="button" onClick={() => handleDelete(recipe._id)}>
-                  Eliminar receta
-                </button>
-              </div>
-            ))}
+                  <Link to={`/recipes/${recipe._id}`}>Ver detalle</Link>
+                  <Link to={`/edit-recipe/${recipe._id}`}>Editar receta</Link>
+                  <button
+                    className="delete-button"
+                    type="button"
+                    onClick={() => handleDelete(recipe._id)}
+                  >
+                    Eliminar receta
+                  </button>
+                </div>
+              ))}
         </div>
       </div>
     </div>

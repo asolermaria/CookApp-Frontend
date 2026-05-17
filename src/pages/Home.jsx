@@ -47,7 +47,9 @@ const Home = () => {
       <div className="home-container">
         <h1>CookApp</h1>
 
-        <span>¡Bienvenid@, <b>{user?.name}</b>!</span>
+        <span>
+          ¡Bienvenid@, <b>{user?.name}</b>!
+        </span>
 
         <nav className="home-nav">
           <Link to="/user-dashboard">Ver mi perfil</Link>

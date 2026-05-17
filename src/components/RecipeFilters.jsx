@@ -1,6 +1,6 @@
 const RecipeFilters = ({ title, setTitle, difficulty, setDifficulty }) => {
   return (
-    <div className="recipes-filters">
+    <div className="home-filters">
       <input
         type="text"
         name="title"

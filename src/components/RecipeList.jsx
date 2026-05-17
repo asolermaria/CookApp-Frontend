@@ -11,9 +11,11 @@ const RecipeList = ({ recipes, loading }) => {
 
   return (
     <>
-      {recipes.map((recipe) => (
-        <RecipeCard key={recipe._id} recipe={recipe} />
-      ))}
+      {recipes
+        .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+        .map((recipe) => (
+          <RecipeCard key={recipe._id} recipe={recipe} />
+        ))}
     </>
   );
 };

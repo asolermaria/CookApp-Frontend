@@ -49,13 +49,16 @@ const FavouriteRecipes = () => {
   return (
     <div className="favorites-page">
       <div className="favorites-container">
-        <Link to="/home">Ver todas las recetas</Link>
+        <nav className="favourites-nav">
+          <Link to="/home">Ver todas las recetas</Link>
+        </nav>
 
         <h1>Mis recetas favoritas</h1>
 
         <div className="recipes-container">
           {favorites
             .filter((favorite) => favorite.recipe_id) // Filtramos solo por los favoritos que tengan recipe_id, así evitamos recetas borradas
+            .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
             .map((favorite) => (
               <div className="recipe-card" key={favorite._id}>
                 <button
