@@ -1,0 +1,3 @@
+# Redirige todas las rutas a index.html para que React Router gestione la navegación, ya que Netlify interpreta las rutas como archivos reales
+
+/* /index.html 200

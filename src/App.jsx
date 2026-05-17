@@ -12,11 +12,6 @@ import EditRecipe from "./pages/EditRecipe";
 import Footer from "./components/Footer";
 
 function App() {
-  const location = useLocation();
-
-  const hideFooter =
-    location.pathname === "/login" || location.pathname === "/register";
-
   return (
     <>
       <Routes>
@@ -30,8 +25,7 @@ function App() {
         <Route path="/create-recipe" element={<CreateRecipe />} />
         <Route path="/edit-recipe/:id" element={<EditRecipe />} />
       </Routes>
-
-      {!hideFooter && <Footer />}
+      <Footer/>
     </>
   );
 }
