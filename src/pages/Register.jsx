@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import api from "../api/axios";
+import logo from "../assets/logi_register_img_1.avif";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -41,6 +42,8 @@ const Register = () => {
         <h1>Registro</h1>
 
         <span>¡Bienvenid@ a CookApp!</span>
+
+        <img src={logo} alt="CookApp logo" className="auth-logo" />
 
         <form onSubmit={handleSubmit}>
           <input

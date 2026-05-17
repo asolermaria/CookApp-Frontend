@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 import api from "../api/axios";
 import { AuthContext } from "../context/AuthContext";
+import logo from "../assets/logi_register_img_1.avif";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -41,6 +42,8 @@ const Login = () => {
         <h1>Iniciar sesión</h1>
 
         <span>¡Bienvenid@ a CookApp!</span>
+
+        <img src={logo} alt="CookApp logo" className="auth-logo" />
 
         <form onSubmit={handleSubmit}>
           <input

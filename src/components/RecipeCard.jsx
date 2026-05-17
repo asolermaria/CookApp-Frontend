@@ -28,9 +28,8 @@ const RecipeCard = ({ recipe }) => {
       </button>
 
       <img src={recipe.image} alt={recipe.title} />
-
       <h2>{recipe.title}</h2>
-
+      <p>Dificutad: {recipe.difficulty}</p>
       <p>Creador: <b>{recipe.user_id?.name}</b></p>
 
       <Link to={`/recipes/${recipe._id}`}>Ver detalle</Link>
