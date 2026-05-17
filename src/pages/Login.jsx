@@ -33,6 +33,7 @@ const Login = () => {
       navigate("/home");
     } catch (error) {
       setError(error.response?.data?.message || "Error al iniciar sesión");
+      console.log(error);
     }
   };
 

@@ -17,6 +17,8 @@ const EditRecipe = () => {
     difficulty: "",
   });
 
+  const [error, setError] = useState("");
+
   useEffect(() => {
     const getRecipe = async () => {
       try {
@@ -65,6 +67,7 @@ const EditRecipe = () => {
       alert("Receta modificada");
       navigate("/user-dashboard");
     } catch (error) {
+      setError(error.response?.data?.message || "Error al editar receta");
       console.log(error);
     }
   };
@@ -84,6 +87,7 @@ const EditRecipe = () => {
           <input
             type="text"
             name="title"
+            placeholder="Título"
             value={formData.title}
             onChange={handleChange}
           />
@@ -91,18 +95,21 @@ const EditRecipe = () => {
           <input
             type="text"
             name="image"
+            placeholder="URL imagen"
             value={formData.image}
             onChange={handleChange}
           />
 
           <textarea
             name="ingredients"
+            placeholder="Ingredientes separados por comas"
             value={formData.ingredients}
             onChange={handleChange}
           />
 
           <textarea
             name="steps"
+            placeholder="Pasos"
             value={formData.steps}
             onChange={handleChange}
           />
@@ -119,6 +126,8 @@ const EditRecipe = () => {
 
           <button type="submit">Guardar cambios</button>
         </form>
+
+        {error && <p className="mensaje-error">{error}</p>}
       </div>
     </div>
   );

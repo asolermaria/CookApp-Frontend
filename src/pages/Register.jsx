@@ -32,7 +32,8 @@ const Register = () => {
 
       navigate("/login");
     } catch (error) {
-      setError(error.response?.data?.message || "Error al iniciar sesión");
+      setError(error.response?.data?.message || "Error en el registro");
+      console.log(error);
     }
   };
 

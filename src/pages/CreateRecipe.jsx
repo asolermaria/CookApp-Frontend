@@ -14,6 +14,8 @@ const CreateRecipe = () => {
     difficulty: "Baja",
   });
 
+  const [error, setError] = useState("");
+
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev, // Mantiene los valores anteriores del formulario
@@ -38,6 +40,7 @@ const CreateRecipe = () => {
       alert("Receta creada");
       navigate("/user-dashboard");
     } catch (error) {
+      setError(error.response?.data?.message || "Error al crear receta");
       console.log(error);
     }
   };
@@ -90,10 +93,10 @@ const CreateRecipe = () => {
             <option value="Alta">Alta</option>
           </select>
 
-          <button type="submit">
-            Crear receta
-          </button>
+          <button type="submit">Crear receta</button>
         </form>
+
+        {error && <p className="mensaje-error">{error}</p>}
       </div>
     </div>
   );
