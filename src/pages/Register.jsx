@@ -30,6 +30,7 @@ const Register = () => {
     try {
       const response = await api.post("/auth/register", formData);
 
+      alert("Usuario registrado correctamente en el sistema");
       navigate("/login");
     } catch (error) {
       setError(error.response?.data?.message || "Error en el registro");

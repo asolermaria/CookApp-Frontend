@@ -38,14 +38,6 @@ const FavouriteRecipes = () => {
     }
   };
 
-  if (loading) {
-    return <p>Cargando favoritos...</p>;
-  }
-
-  if (favorites.length === 0) {
-    return <p>No tienes recetas favoritas.</p>;
-  }
-
   return (
     <div className="favorites-page">
       <div className="favorites-container">
@@ -54,6 +46,11 @@ const FavouriteRecipes = () => {
         </nav>
 
         <h1>Mis recetas favoritas</h1>
+
+        {loading && <p>Cargando recetas favoritas...</p>}
+        {!loading && favorites.length === 0 && (
+          <p>Aun no tienes recetas favoritas.</p>
+        )}
 
         <div className="recipes-container">
           {favorites
