@@ -29,6 +29,9 @@ const UserDashboard = () => {
 
   const handleLogout = async () => {
     try {
+      const isConfirmed = confirm("¿Estás segur@ que quieres cerrar sesión?");
+      if (!isConfirmed) return;
+
       await api.post("/auth/logout");
       setUser(null); // Limpiamos el contexto al cerrar sesión
       navigate("/login");
