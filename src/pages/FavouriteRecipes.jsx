@@ -26,8 +26,11 @@ const FavouriteRecipes = () => {
     getFavorites();
   }, []);
 
-  const handleRemoveFavorite = async (recipeId) => {
+  const handleRemoveFavorite = async (recipeId, recipeTitle) => {
     try {
+      const isConfirmed = confirm(`¿Eliminar ${recipeTitle} de favoritos?`);
+      if (!isConfirmed) return;
+
       await api.delete(`/favorites/${recipeId}`);
 
       setFavorites((prev) =>
@@ -60,7 +63,12 @@ const FavouriteRecipes = () => {
               <div className="recipe-card" key={favorite._id}>
                 <button
                   type="button"
-                  onClick={() => handleRemoveFavorite(favorite.recipe_id._id)}
+                  onClick={() =>
+                    handleRemoveFavorite(
+                      favorite.recipe_id._id,
+                      favorite.recipe_id.title,
+                    )
+                  }
                 >
                   <FaHeart color="red" />
                 </button>
